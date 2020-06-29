@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hashiboot-producer-k8s
+  annotations:
+    'consul.hashicorp.com/service-sync': 'true'
+spec:
+  selector:
+    name: hashiboot-producer-k8s
+  clusterIP: None
+  ports:
+  - name: hashiboot-producer-k8s
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hashiboot-producer-k8s
+  labels:
+    name: hashiboot-producer-k8s
+spec:
+  hostname: hashiboot-producer-k8s
+  subdomain: default-subdomain
+  containers:
+  - image: tkaburagi/producer-k8s
+    name: hashiboot-producer-k8s
+    env:
+    - name: CONSUL_HOST
+      value: "10.60.1.5"
+    - name: message
+      value: "Hola:) from Producer on K8s"
