@@ -7,7 +7,7 @@ spec:
     spec:
       containers:
         - name: dns
-          image: anubhavmishra/tiny-tools
+          limage: anubhavmishra/tiny-tools
           command: ['dig', 'consul.service.consul']
       restartPolicy: Never
   backoffLimit: 4
